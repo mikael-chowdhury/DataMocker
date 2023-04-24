@@ -96,13 +96,6 @@ type UserStructure = {
 ```typescript
 import dm from "@rexysaur/datamocker";
 
-function favouriteColour() {
-  // Returns a random colour
-  const colours = ["red", "green", "blue", "yellow"];
-
-  return colours[Math.floor(Math.random() * colours.length)];
-}
-
 type UserStructure = {
   firstName: string;
   email: string;
@@ -118,10 +111,44 @@ type UserStructure = {
       // Properties of each user
       firstName: dm.firstName(),
       email: dm.email(),
-      favouriteColour: favouriteColour, // Function doesn't return another function, so you can't call it
+      favouriteColour: dm.custom(() =>
+        dm.util.pickRandom(["red", "green", "blue", "yellow"])
+      ), // Custom generator function
+      // Picks a random element from the array
     },
   });
 
   console.log(users);
 })();
+```
+
+## Utilities
+
+DataMocker provides a few utility functions that could be helpful where creating generator templates
+
+### pickRandom
+
+pickRandom chooses and returns a random element of an array
+
+```typescript
+pickRandom(["blue", "yellow", "red", "green"]); // e.g yellow
+pickRandom(["blue", "yellow", "red", "green"]); // e.g red
+```
+
+### getRandomInt
+
+getRandomInt is just an extension of the Math.random function that allows a minimum, and a maximum value to be provided. The maximum value is **non-inclusive**.
+
+```typescript
+getRandomInt(10, 20); // Any number between 10 and 19
+```
+
+### generateRandomDigits
+
+generates random digits with a certain final length
+
+```typescript
+generateRandomDigits(1); // 6
+generateRandomDigits(5); // 49525
+generateRandomDigits(10); // 2059284363
 ```

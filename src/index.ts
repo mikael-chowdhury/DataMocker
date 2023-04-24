@@ -2,6 +2,8 @@ import { EmailGenerator } from "./generators/EmailGenerator";
 import { NameGenerator } from "./generators/NameGenerator";
 import { PhoneNumberGenerator } from "./generators/PhoneNumberGenerator";
 
+import * as _util from "./util/util";
+
 import { GenerationStructure } from "./types";
 
 const firstName = () => {
@@ -18,6 +20,10 @@ function email() {
 
 function phone() {
   return new PhoneNumberGenerator().generate;
+}
+
+function custom<T>(callback: () => T) {
+  return callback;
 }
 
 async function generate<T extends {}>(
@@ -50,4 +56,10 @@ async function generate<T extends {}>(
   });
 }
 
-export default { firstName, lastName, email, phone, generate };
+const util = {
+  pickRandom: _util.pickRandom,
+  getRandomInt: _util.getRandomInt,
+  generateRandomDigits: _util.generateRandomDigits,
+};
+
+export default { firstName, lastName, email, phone, custom, generate, util };

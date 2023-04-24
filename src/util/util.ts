@@ -1,10 +1,10 @@
+import axios from "axios";
+
 export async function fetchData(url: string) {
   try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return response.json();
+    const response = await axios.get(url);
+
+    return response.data;
   } catch (error) {
     console.error("Unable to fetch data:", error);
   }

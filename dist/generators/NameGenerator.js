@@ -48,7 +48,7 @@ class NameGenerator {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise((res, rej) => __awaiter(this, void 0, void 0, function* () {
                 const surnames = yield (0, util_1.fetchNames)("surnames");
-                res((0, util_1.pickRandom)(surnames.data));
+                res((0, util_1.pickRandom)(surnames));
             }));
         });
     }

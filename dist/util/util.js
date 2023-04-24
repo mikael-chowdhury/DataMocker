@@ -8,16 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateRandomDigits = exports.getRandomInt = exports.pickRandom = exports.fetchNames = exports.fetchData = void 0;
+const axios_1 = __importDefault(require("axios"));
 function fetchData(url) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const response = yield fetch(url);
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            return response.json();
+            const response = yield axios_1.default.get(url);
+            return response.data;
         }
         catch (error) {
             console.error("Unable to fetch data:", error);

@@ -43,7 +43,7 @@ export class NameGenerator implements IGenerator<Name> {
   async generateLastName(): Promise<string> {
     return new Promise(async (res, rej) => {
       const surnames = await fetchNames("surnames");
-      res(pickRandom(surnames.data));
+      res(pickRandom(surnames));
     });
   }
 
